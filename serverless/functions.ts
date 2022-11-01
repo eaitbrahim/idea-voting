@@ -1,18 +1,18 @@
 import { AWS } from '@serverless/typescript';
 
-// interface Authorizer {
-//   name: string;
-//   type: string;
-//   arn: {
-//     'Fn::GetAtt': string[];
-//   };
-// }
+interface Authorizer {
+  name: string;
+  type: string;
+  arn: {
+    'Fn::GetAtt': string[];
+  };
+}
 
-// const authorizer: Authorizer = {
-//   name: 'authorizer',
-//   type: 'COGNITO_USER_POOLS',
-//   arn: { 'Fn::GetAtt': ['CognitoUserPool', 'Arn'] },
-// };
+const authorizer: Authorizer = {
+  name: 'authorizer',
+  type: 'COGNITO_USER_POOLS',
+  arn: { 'Fn::GetAtt': ['CognitoUserPool', 'Arn'] },
+};
 
 const functions: AWS['functions'] = {
   createBoard: {
@@ -22,7 +22,7 @@ const functions: AWS['functions'] = {
         http: {
           method: 'post',
           path: '/boards',
-          //authorizer,
+          authorizer,
         },
       },
     ],
@@ -34,7 +34,6 @@ const functions: AWS['functions'] = {
         http: {
           method: 'get',
           path: '/boards',
-          //authorizer,
         },
       },
     ],
@@ -46,7 +45,6 @@ const functions: AWS['functions'] = {
         http: {
           method: 'get',
           path: '/boards/{boardId}',
-          //authorizer,
         },
       },
     ],
@@ -58,7 +56,7 @@ const functions: AWS['functions'] = {
         http: {
           method: 'post',
           path: '/ideas',
-          //authorizer,
+          authorizer,
         },
       },
     ],
@@ -70,7 +68,7 @@ const functions: AWS['functions'] = {
         http: {
           method: 'post',
           path: '/ideas/{ideaId}',
-          //authorizer,
+          authorizer,
         },
       },
     ],
